@@ -1,15 +1,23 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from .serializers import UserSerializer, TaskSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.shortcuts import get_object_or_404
 
-from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 from django.contrib.auth.models import User
+from .models import Task
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_tasks(request):
+    user = request.user
+    tasks = Task.objects.filter(assigned_users=user)
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def login(request):

@@ -8,13 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { ChecklistComponent } from './checklist/checklist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    TasksComponent,
+    ChecklistComponent
   ],
   imports: [
     BrowserModule,

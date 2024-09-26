@@ -11,6 +11,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  getUserTasks(token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
+    return this.http.get(`${this.baseUrl}/tasks`, { headers });
+  }
+
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, { username, password });
   }
